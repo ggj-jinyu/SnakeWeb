@@ -1,0 +1,8 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Datasource local storage ignored files
+/../../../../../../../:\BaiduNetdiskDownload\Spring+SpringMVC+MyBatis\第8天视频-springmvc异常处理\素材\SnakeWeb\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/

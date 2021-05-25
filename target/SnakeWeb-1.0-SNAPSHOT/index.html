@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>网页版贪吃蛇</title>
+    <!-- 1. 导入CSS的全局样式 -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/common.css" rel="stylesheet">
+    <!-- 2. jQuery导入，建议使用1.9以上的版本 -->
+    <script src="js/jquery-3.3.1.js"></script>
+    <!-- 3. 导入bootstrap的js文件 -->
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        let intervalNum;
+        let startFlag = true;
+
+        $(function () {
+            $.get("canvasServlet",null,function (info){
+                $("#img_area").get(0).src = info.image_base64;
+            })
+
+            $("#btn_start").click(function () {
+                startGame();
+            });
+
+            $(document).keydown(function(event){
+                let direction = null;
+                switch (event.keyCode){
+                    case 38:
+                    case 87: direction="U";break;
+                    case 40:
+                    case 83: direction="D";break;
+                    case 37:
+                    case 65: direction="L";break;
+                    case 39:
+                    case 68: direction="R";break;
+                    default: break;
+                }
+                if(!startFlag) $.get("changeDirection",{direction:direction})
+            });
+        })
+
+        function startGame(){
+            if(startFlag){ //true: 开始
+                startFlag = false;
+                $("#btn_start").html("暂停游戏");
+                $.get("startGame",null,function (){
+                    intervalNum = setInterval(sport,150);
+                });
+            }else {     //false: 暂停
+                startFlag = true;
+                $("#btn_start").html("开始游戏");
+                clearInterval(intervalNum);
+            }
+        }
+
+        function sport() {
+            //info: string image_base64  boolean startgame  int score
+            $.get("sportServlet", null, function (info) {
+                $("#img_area").get(0).src = info.image_base64;
+                $("#score").html(info.score)
+                if(!info.startgame){
+                    startFlag = true;
+                    $("#btn_start").html("开始游戏")
+                    clearInterval(intervalNum);
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1>Snake Game<small> by GGJ</small></h1>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <img class="borderBody" id="img_area"/>
+            </div>
+            <div class="col-md-3">
+                <h2>
+                    <strong class="text-primary">得分:<label id="score"></label><br></strong>
+                </h2>
+                <br>
+                <button type="button" class="btn btn-success" id="btn_start">开始游戏</button>
+                <br>
+                <br>
+                <div>
+                    <h4>规则解析:</h4>
+                    <ol>
+                        <li>键盘的上、下、左、右箭头控制小蛇的走动</li>
+                        <li>同样支持WASD按键控制小蛇的走动</li>
+                        <li>死亡后，请重置游戏后再游玩</li>
+                        <li>吃到第1~9个食物得1分<br>
+                            吃到第10~19个食物得10分<br>
+                            吃到第20~29个食物得20分<br>
+                            以此类归
+                        </li>
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
