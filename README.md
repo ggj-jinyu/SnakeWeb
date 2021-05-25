@@ -59,19 +59,19 @@
 
 #### 1.页面设计
 
-![image-20210525200134227](C:\Users\hasee\AppData\Roaming\Typora\typora-user-images\image-20210525200134227.png)
+![image-page](https://github.com/ggj-jinyu/SnakeWeb/blob/master/page.png)
 
 #### 2.后台设计
 
 ##### 1) entity(实体包)，类图如下图所示：
 
-![image-20210525200142208](C:\Users\hasee\AppData\Roaming\Typora\typora-user-images\image-20210525200142208.png)
+![image-entity](https://github.com/ggj-jinyu/SnakeWeb/blob/master/entity.png)
 
 其中，ResInfo是结果封装类，便于把返回前端的所有数据封装成一个ResInfo对象返回给前台；Images是用来封装图片，先是用反射获取图片url,再生成public static ImageIcon，以便其它类访问
 
 ##### 2)service层，由于没有dao层，service层相对简单，如下图所示
 
-![image-20210525200148224](C:\Users\hasee\AppData\Roaming\Typora\typora-user-images\image-20210525200148224.png)
+![image-service](https://github.com/ggj-jinyu/SnakeWeb/blob/master/service.png)
 
 两个service只有init()方法，该方法初始化snake/food后返回
 
@@ -92,7 +92,7 @@
 
 #### 1.项目架构
 
-​		![image-20210525200157099](C:\Users\hasee\AppData\Roaming\Typora\typora-user-images\image-20210525200157099.png)
+​		![image-aboutProject](https://github.com/ggj-jinyu/SnakeWeb/blob/master/aboutProject.png)
 
 #### 2.项目配置
 
